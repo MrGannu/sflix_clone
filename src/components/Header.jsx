@@ -39,7 +39,7 @@ const Header = () => {
         
         
       </div>
-      {login && <Login setLogin={setLogin}/>}
+      {login && <Login setLogin={setLogin} login={login}/>}
       {sidebar && <Sidebar setSidebar={setSidebar}/>}
     </div>
   )

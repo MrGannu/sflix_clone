@@ -16,7 +16,7 @@ const Details = () => {
     
     const handleFetchMovie = async () => {
         try {
-        const result = await fetch(`http://localhost:8000/api/movie/${id}/`, {
+        const result = await fetch(``, {
             method: 'GET',
         });
     
