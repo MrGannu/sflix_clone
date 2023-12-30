@@ -118,7 +118,7 @@
     padding: 1.2rem 0;
 }
 .movie_div_heading h3{
-    font-size: 23px;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-right: 3rem;
     color: var(--font-heading-color);
@@ -171,6 +171,46 @@
 
     .movie_card img {
         height: 100%; /* Adjust image height for smaller screens */
+    }
+    .ratings img{
+        width: .8rem;
+        height: .8rem;
+        margin-right: .2rem;
+    }
+    .ratings p{
+        font-size: .7rem;
+        color: var(--font-heading-color);
+    }
+    
+    .quality{
+        font-size: .7rem;
+        font-weight: 600;
+    }
+    .title{
+        font-size: .78rem;
+        padding: 0 0.5rem;
+    }
+    .movie_card_img{
+        height: 70%;
+    }
+    .movie_card_content_info{
+        height: 30%;
+    }
+    .watch_btn {
+        width: 93%;
+        height: 28px;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: var(--font-heading-color);
+        background-color: var(--button-bg-color);
+        border-radius: .2rem;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        margin-bottom: .2rem;
     }
 }
 

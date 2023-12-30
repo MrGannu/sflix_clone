@@ -1,12 +1,9 @@
 .carousel_div{
     width: 100%;
-    height: 65%;
+    height: auto;
+    min-height: 31rem; /* Set your desired minimum height */
+    max-height: 30rem;
     padding: 0 7rem;
-}
-.carousel_card{
-    flex: 1 1 1;
-    max-height: 100%;
-    overflow: hidden;
     display: flex;
 }
 .carousel_left{
@@ -14,14 +11,13 @@
     position: relative;
 }
 .slide {
-    width: 100%;
-    height: 100%;
     opacity: 0.5;
 }
 .slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 .slide.active {
     opacity: 1;
@@ -33,7 +29,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: linear-gradient(180deg,rgba(30,33,41,0) 0,#1e2129 71%,#1e2129 100%);
+    background: linear-gradient(180deg,rgba(30,33,41,0) 0,#1e2129 60%,#1e2129 100%);
 }
 .slide_navigations{
     width: 100%;
@@ -95,6 +91,10 @@
 .slide_info_right_end h3{
     font-size: 1.3rem;
     font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to two lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     color: var(--font-heading-color);
 }
 .rating_quality{
@@ -165,7 +165,6 @@
 }
 .carousel_right_movie_card_img{
     flex: 1 1 20%;
-    height: 100%;
     overflow: hidden;
 }
 .carousel_right_movie_card_img img{
@@ -211,21 +210,23 @@
 }
 .carousel_right_title{
     flex: 1 1 1;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 500;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--font-heading-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Limit to two lines */
+    -webkit-box-orient: vertical;
 }
 .carousel_right_description{
-    font-size: .75rem;
+    font-size: .7rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    margin-top: 1rem;
+    margin-top: .5rem;
     color: var(--font-paragraph-color);
 }
 .carousel_right_watch_now_btn{
@@ -259,9 +260,11 @@
 
 @media only screen and (max-width: 768px) {
     .carousel_div{
+        width: 100%;
+        height: auto;
+        min-height: fit-content; /* Set your desired minimum height */
+        max-height: fit-content;
         padding: 0 1rem;
-    }
-    .carousel_card{
         display: block;
     }
     .carousel_right{

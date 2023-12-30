@@ -1,42 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MoviesArray from '../arrays/MoviesArray';
 import "../styles/details.css"
 import Suggested from './Suggested';
 import ReactLoading from 'react-loading';
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const Details = () => {
-    const [data, setData] = useState(MoviesArray);
-    // const movie = data.find(movie => _movie?.title === title && _movie?.id === id);
-
     const [_movie, _setMovie] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
-    
     const handleFetchMovie = async () => {
         try {
-        const result = await fetch(``, {
-            method: 'GET',
-        });
-    
-        if (result.ok) {
-            const response = await result.json();
-            console.log(response)
-            _setMovie(response);
-        } else {
-            setError("Failed to fetch movie data");
-        }
+            const docSnapshot = await getDoc(doc(db, 'movies', id));
+            if (docSnapshot.exists()) {
+                _setMovie(docSnapshot.data());
+            } else {
+                setError("Movie not found");
+            }
         } catch (error) {
-        setError(error.message);
+            setError(`Failed to fetch movie data: ${error.message}`);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
     
+    
     useEffect(() => {
         handleFetchMovie();
-        console.log("Hello World");
     }, []);
     
     
@@ -56,10 +48,10 @@ const Details = () => {
             </div>
         :
             <div className='details_div'>
-                <img className='background_img' src={`http://localhost:8000/movie/wallpaper/${_movie?.image}`} alt="movie-image" />
+                <img className='background_img' src={`${_movie?.wallpaper}`} alt="movie-image" />
                 <div className="movie_details">
                     <div className="movie_details_left">
-                        <img src={`http://localhost:8000/movie/image/${_movie?.image}`} alt="movie-image" />
+                        <img src={`${_movie?.image}`} alt="movie-image" />
                     </div>
                     <div className="movie_details_right">
                         <h3 className='movie_details_title'>{_movie?.title}</h3>

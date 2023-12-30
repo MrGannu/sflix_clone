@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/carousel.css";
 import { NavLink } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
   const [_slide, _setSlides] = useState([]);
   const [error, setError] = useState(null);
 
   const suggestedMovies = [..._slide].sort((a, b) => b.id - a.id);
 
+  const [currentIndex, setCurrentIndex] = useState(2);
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % _slide.length);
   };
@@ -17,24 +18,19 @@ const Carousel = () => {
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + _slide.length) % _slide.length);
   };
-
-
   
   const handleFetchMovie = async () => {
       try {
-      const result = await fetch(`http://localhost:8000/api/movie/`, {
-          method: 'GET',
-      });
-  
-      if (result.ok) {
-          const response = await result.json();
-          _setSlides(response);
-      } else {
-          setError("Failed to fetch movie data");
-      }
+        const querySnapshot = await getDocs(collection(db, 'movies')); // Assuming 'movies' is the name of your collection
+        const moviesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        _setSlides(moviesData);
       } catch (error) {
-        setError(error.message);
+          setError(`Failed to fetch movie data: ${error.message}`);
       } finally {
+          // setLoading(false);
       }
   };
   
@@ -52,10 +48,9 @@ const Carousel = () => {
 
   return (
     <div className='carousel_div'>
-      <div className="carousel_card">
       <div className="carousel_left">
         <div className={`slide ${currentIndex === currentIndex ? 'active' : ''}`}>
-            <img src={`http://localhost:8000/movie/wallpaper/${_slide[currentIndex]?.wallpaper}`} alt="" />
+            <img src={`${_slide[currentIndex]?.wallpaper}`} alt="" />
         </div>
         <div className="navigation_info">
           <div className="slide_navigations">
@@ -64,7 +59,7 @@ const Carousel = () => {
           </div>
           <div className="slides_information">
             <div className={`slides_info_left ${currentIndex === currentIndex ? 'active' : ''}`}>
-              <img src={`http://localhost:8000/movie/image/${_slide[currentIndex]?.image}`} alt="" />
+              <img src={`${_slide[currentIndex]?.image}`} alt="" />
             </div>
             <div className="slides_info_right">
               <div className="slide_info_right_start">
@@ -96,7 +91,7 @@ const Carousel = () => {
           {suggestedMovies.slice(0, 3).map((movie) => (
             <div key={movie?.id} className="carousel_right_movie_card">
               <div className="carousel_right_movie_card_img">
-                <img src={`http://localhost:8000/movie/image/${movie?.image}`} alt="movie-image" />
+                <img src={`${movie?.image}`} alt="movie-image" />
               </div>
               <div className='carousel_right_movie_card_info'>
                 <div className="carousel_right_movie_card_details">
@@ -123,7 +118,6 @@ const Carousel = () => {
         <div className="carousel_right_right">
           Share with
         </div>
-      </div>
       </div>
     </div>
   );

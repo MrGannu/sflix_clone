@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import app from '../firebase/config';
+import {app} from '../firebase/config';
 import "../styles/login.css"
 
 const auth = getAuth(app);
 
-const Login = ({ setLogin, login }) => {
+const Login = ({ setLogin }) => {
   const [register, setRegister] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -15,16 +15,25 @@ const Login = ({ setLogin, login }) => {
     password: '',
     confirm_password: '',
   });
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     const { name, email, password, confirm_password } = data;
 
+    if (!name || !email || !password || !confirm_password) {
+      setError('Please fill in all fields.');
+      setLoading(false);
+      return;
+    }
+
     if (password !== confirm_password) {
-      console.error('Password and Confirm Password do not match');
+      setError('Password and Confirm Password do not match.');
+      setLoading(false);
       return;
     }
 
@@ -39,18 +48,22 @@ const Login = ({ setLogin, login }) => {
         password: '',
         confirm_password: '',
       });
+      setError('');
       // Close the registration modal
       setRegister(false);
       // Open the login modal after successful registration
       setLogin(true);
     } catch (error) {
-      console.error('Registration failed:', error.message);
+      setError(`Registration failed: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     try {
       // Simulating login, replace with actual login logic
       // For example, using signInWithEmailAndPassword as in the registration
@@ -70,7 +83,9 @@ const Login = ({ setLogin, login }) => {
       // For example, redirecting the user to another page
       navigate('/');
     } catch (error) {
-      console.error('Login failed:', error.message);
+      setError(`Login failed: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,6 +106,7 @@ const Login = ({ setLogin, login }) => {
             <div className="form_heading">
               <h3>Welcome back!</h3>
             </div>
+            {error && <div className="error-message" hidden>{error}</div>}
             <div className="form_group">
               <label htmlFor="name">Your name</label>
               <input type="text" placeholder='Name' name='name' onChange={handleChange} />
@@ -122,6 +138,7 @@ const Login = ({ setLogin, login }) => {
             <div className="form_heading">
               <h3>Welcome back!</h3>
             </div>
+            {error && <div className="error-message" hidden>{error}</div>}
             <div className="form_group">
               <label htmlFor="email">Email address</label>
               <input type="email" placeholder='name@email.com' name='email' onChange={handleChange} />

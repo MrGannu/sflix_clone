@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Layout from './layout/Layout'
 import NoPage from './pages/NoPage'
 import Details from './components/Details'
+import CreateMovie from './crud/CreateMovie'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/create-movies' element={<CreateMovie />} />
           <Route path="details/:title/:id" element={<Details />} />
           {/* <Route path="contact" element={<Contact />} /> */}
           <Route path="*" element={<NoPage />} />
