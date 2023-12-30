@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import "../styles/header.css"
 import { NavLink } from 'react-router-dom'
 import Login from '../auth/Login'
 import Sidebar from './Sidebar'
+import Profile from '../dropdowns/Profile'
 
 const Header = () => {
   const [login, setLogin] = useState(false)
+  const [profile, setProfile] = useState(false)
   const [sidebar, setSidebar] = useState(false)
   const user = JSON.parse(localStorage.getItem('userData'))
 
@@ -28,7 +30,7 @@ const Header = () => {
         {
           user ? 
           <>
-            <img className='loggedin_user_img' src="/images/loggedin_user.png" alt="user-logo" />
+            <img className='loggedin_user_img' src="/images/loggedin_user.png" alt="user-logo" onClick={()=>setProfile(!profile)} />
           </>
           :
           <div className='login' onClick={()=>setLogin(!login)}>
@@ -36,8 +38,11 @@ const Header = () => {
             <span>login</span>
           </div> 
         }
-        
-        
+        {profile && 
+          <div className="profile_div">
+            <Profile setProfile={setProfile} profile={profile}/>
+          </div>
+        }
       </div>
       {login && <Login setLogin={setLogin} login={login}/>}
       {sidebar && <Sidebar setSidebar={setSidebar}/>}

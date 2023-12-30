@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/card.css';
-import { Link } from 'react-router-dom';
 
 const Card = ({ _movie }) => {
+  const [loading, setLoading] = useState(false)
   return (
       <div className='movie_card' key={_movie?.id}>
         <div className="movie_card_img">
-          <img src={`${_movie?.image}`} alt="movie-image" />
+          {loading ? "" : <img src={`${_movie?.image}`} loading='lazy' alt="movie-image" />}
         </div>
         <div className="movie_card_content_info">
           <div className='movie_card_details'>
             <div className='ratings'>
-              <img src='/images/star.png' alt='rating-logo' />
+              <img src='/images/star.png' loading='lazy' alt='rating-logo' />
               <p className='rating_text'>{_movie?.ratings}</p>
             </div>
             <p className='quality'>{_movie?.quality}</p>

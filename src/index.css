@@ -5,6 +5,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  touch-action: none;
+  user-select: none;
 }
 
 :root{
@@ -18,8 +20,12 @@
   --font-heading-color:#ffffff;
   --font-paragraph-color:#b1b0b0;
 }
-html{
+/* html{
   scroll-behavior: smooth;
+} */
+.navlink{
+  color: #ffffff;
+  text-decoration: none;
 }
 .layout_div{
   width: 100%;
@@ -38,6 +44,9 @@ html{
 }
 
 @media only screen and (max-width: 768px) {
+  *{
+    user-select: none !important;
+  }
   .movie_div{
     width: 100%;
     height: fit-content;

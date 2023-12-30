@@ -27,6 +27,7 @@
     height: 100%;
     object-fit: cover;
     margin-bottom: .5rem;
+    aspect-ratio: 9/16;
 }
 .movie_card_content_info{
     width: 100%;

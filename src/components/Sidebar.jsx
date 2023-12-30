@@ -1,7 +1,10 @@
 import React from 'react'
 import "../styles/sidebar.css"
+import { NavLink } from 'react-router-dom'
 
 const Sidebar = ({setSidebar}) => {
+  const user = JSON.parse(localStorage.getItem('userData'))
+
   return (
     <div className='sidebar_div' onClick={()=>setSidebar(false)}>
       <div className="side_drawer">
@@ -14,6 +17,16 @@ const Sidebar = ({setSidebar}) => {
               <img src="/images/home.png" alt="" />
               <span>Home</span>
             </li>
+            {user ? 
+              <NavLink className="navlink" to="/create-movies">
+                <li>
+                  <img src="/images/create.png" alt="" />
+                  <span>Add Movies</span>
+                </li>
+              </NavLink> 
+              :
+              ""
+             }
             <li>
               <img className='movie_play_dark' src="/images/play-dark.png" alt="" />
               <span>Movies</span>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase/config'; // Assuming db is the Firestore instance exported from your firebase/config file
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../styles/card.css';
 
 const Movie = () => {
@@ -62,12 +62,16 @@ const Movie = () => {
                 <p className='released'>{_movie?.released}</p>
               </div>
               <h3 className='title'>{_movie?.title}</h3>
-              <Link to={`/details/${encodeURIComponent(_movie?.title)}/${_movie?.id}`} className='watch_now_btn'>
+              <NavLink to={`/details/${encodeURIComponent(_movie?.title)}/${_movie?.id}`}
+               onClick={()=>{
+                window.scrollTo(0,0);
+                
+              }} className='watch_now_btn'>
                 <button className='watch_btn'>
                   <img src='/images/play-light.png' alt='play-logo' />
                   <p>Watch now</p>
                 </button>
-              </Link>
+              </NavLink>
             </div>
           </div>
         ))}

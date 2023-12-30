@@ -48,7 +48,7 @@ const Details = () => {
             </div>
         :
             <div className='details_div'>
-                <img className='background_img' src={`${_movie?.wallpaper}`} alt="movie-image" />
+                <img className='background_img' src={`${_movie?.wallpaper}`} loading='eager' alt="movie-image" />
                 <div className="movie_details">
                     <div className="movie_details_left">
                         <img src={`${_movie?.image}`} alt="movie-image" />
