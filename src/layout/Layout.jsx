@@ -1,16 +1,17 @@
-import React from 'react'
-import Header from '../components/Header'
-import { Outlet } from 'react-router-dom'
-import Footer from '../components/Footer'
+import React from 'react';
+import Header from '../components/Header';
+import { Outlet } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Search from '../components/Search';
 
-const Layout = () => {
+const Layout = ({setSearchQuery, searchQuery, searchData}) => {
   return (
     <div className='layout_div'>
-        <Header/>
-        <Outlet/>
-        <Footer/>
+      <Header setSearchQuery={setSearchQuery}/>
+      {searchQuery ? <Search searchData={searchData} searchQuery={searchQuery}/> : <Outlet />}
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -9,7 +9,7 @@
     height: 100%;
     opacity: 0.3;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
 }
 .movie_details{
     width: 70%;

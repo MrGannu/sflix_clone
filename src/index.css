@@ -5,8 +5,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  touch-action: none;
-  user-select: none;
+  border: 0;
+  outline: 0;
 }
 
 :root{
@@ -44,6 +44,17 @@
 }
 
 @media only screen and (max-width: 768px) {
+  *{
+    user-select: none !important;
+  }
+  .movie_div{
+    width: 100%;
+    height: fit-content;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
   *{
     user-select: none !important;
   }

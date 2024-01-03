@@ -1,42 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { getDocs, collection } from 'firebase/firestore';
-import { db } from '../firebase/config'; // Assuming db is the Firestore instance exported from your firebase/config file
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/card.css';
 
-const Movie = () => {
-  const [_movie, _setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const handleFetchMovie = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'movies')); // Assuming 'movies' is the name of your collection
-      const moviesData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      _setMovie(moviesData);
-
-    } catch (error) {
-      setError(`Failed to fetch movie data: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    handleFetchMovie();
-  }, []);
-
-  if (loading) {
-    return <div className='Loading_screen'></div>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
+const Movie = ({_movie}) => {
+  const [movieData, setMovieData] = useState(_movie)
   return (
     <div className='movie_div'>
       <div className="movie_div_heading">
@@ -47,7 +14,7 @@ const Movie = () => {
         </ul>
       </div>
       <div className="movie_cards">
-        {_movie.slice(0, 12).map((_movie) => (
+        {movieData.slice(0, 12).map((_movie) => (
           <div className='movie_card' key={_movie?.id}>
             <div className="movie_card_img">
               <img src={`${_movie?.image}`} alt="movie-image" />

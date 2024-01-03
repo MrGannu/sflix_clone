@@ -217,16 +217,62 @@
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .movie_cards {
-        grid-template-columns: repeat(4, 1fr); /* Adjust columns for tablets */
+        grid-template-columns: repeat(4, 1fr); /* Adjust columns for smaller screens */
         gap: .5rem;
     }
 
     .movie_card {
-        height: auto; /* Adjust height for dynamic content */
+        height: 300px;
+        position: relative; /* Adjust height for dynamic content */
     }
 
     .movie_card img {
-        height: 100%; /* Adjust image height for tablets */
+        height: 100%; /* Adjust image height for smaller screens */
+    }
+    .ratings img{
+        width: .8rem;
+        height: .8rem;
+        margin-right: .2rem;
+    }
+    .ratings p{
+        font-size: .7rem;
+        color: var(--font-heading-color);
+    }
+    
+    .quality{
+        font-size: .7rem;
+        font-weight: 600;
+    }
+    .title{
+        font-size: .78rem;
+        padding: 0 0.5rem;
+    }
+    .movie_card_img{
+        height: 70%;
+    }
+    .movie_card_content_info{
+        height: 30%;
+    }
+    .watch_btn {
+        width: 93%;
+        height: 28px;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: var(--font-heading-color);
+        background-color: var(--button-bg-color);
+        border-radius: .2rem;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+        margin-bottom: .2rem;
+    }
+    .watch_btn img {
+        height: 10px;
+        object-fit: contain;
+        margin-right: .5rem;
     }
 }
 

@@ -5,7 +5,7 @@ import Login from '../auth/Login'
 import Sidebar from './Sidebar'
 import Profile from '../dropdowns/Profile'
 
-const Header = () => {
+const Header = ({setSearchQuery, handleSearch}) => {
   const [login, setLogin] = useState(false)
   const [profile, setProfile] = useState(false)
   const [sidebar, setSidebar] = useState(false)
@@ -21,10 +21,13 @@ const Header = () => {
           <img src="/images/menu.png" alt="menu-img" />
           <span>Browse</span>
         </div>
-        <div className="search">
-          <img src="/images/search.png" alt="search-img" />
-          <input type="text" placeholder='Enter keywords...' />
-        </div>
+          <div className="search">
+            <form onSubmit={handleSearch}>
+                <img src="/images/search.png" alt="search-img" />
+                <input type="text" placeholder='Enter keywords...' onChange={(e) => setSearchQuery(e.target.value)}/>
+                <button type='submit' hidden></button>
+            </form>
+          </div>
       </div>
       <div className="herder_right" >
         {

@@ -3,11 +3,11 @@ import Movie from '../components/Movie'
 import Carousel from '../components/Carousel'
 import Latest from '../components/Latest'
 
-const Home = () => {
+const Home = ({_movie}) => {
   return (
     <div className='home_div'>
       <Carousel/>
-      <Movie/>
+      <Movie _movie={_movie} />
       <Latest/>
     </div>
   )

@@ -3,6 +3,7 @@ import "../styles/carousel.css";
 import { NavLink } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import ReactLoading from 'react-loading';
 
 const Carousel = () => {
   const [_slide, _setSlides] = useState([]);
@@ -51,7 +52,9 @@ const Carousel = () => {
   return (
     <>
       {loading ?
-        <div className="loading_screen"></div>
+        <div className="loading_img">
+          <ReactLoading height={40} width={40} />
+      </div>
       :
         <div className='carousel_div'>
           <div className="carousel_left">
