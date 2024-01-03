@@ -3,6 +3,7 @@ import '../styles/card.css';
 
 const Card = ({ _movie }) => {
   const [loading, setLoading] = useState(false)
+  const [options, setOptions] = useState(false)
   return (
       <div className='movie_card' key={_movie?.id}>
         <div className="movie_card_img">

@@ -22,7 +22,7 @@ const Header = ({setSearchQuery, handleSearch}) => {
           <span>Browse</span>
         </div>
           <div className="search">
-            <form onSubmit={handleSearch}>
+            <form className='search_form' onSubmit={handleSearch}>
                 <img src="/images/search.png" alt="search-img" />
                 <input type="text" placeholder='Enter keywords...' onChange={(e) => setSearchQuery(e.target.value)}/>
                 <button type='submit' hidden></button>

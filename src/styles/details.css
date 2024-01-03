@@ -1,15 +1,17 @@
 .details_div{
     width: 100%;
-    height: 85vh;
+    height: 88vh;
     position: relative;
     margin-bottom: 2rem;
 }
-.background_img{
+.movie_background{
     width: 100%;
     height: 100%;
     opacity: 0.3;
     object-fit: cover;
     object-position: center;
+    image-orientation: from-image;
+    image-rendering: optimizeSpeed;
 }
 .movie_details{
     width: 70%;

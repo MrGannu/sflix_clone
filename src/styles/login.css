@@ -41,6 +41,11 @@
     right: 6%;
     cursor: pointer;
 }
+.login_form{
+    width: 100%;
+    height: fit-content;
+    display: block;
+}
 .form_heading{
     width: 100%;
     height: fit-content;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../styles/details.css"
-import Suggested from './Suggested';
 import ReactLoading from 'react-loading';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/config';
@@ -48,7 +47,7 @@ const Details = () => {
             </div>
         :
             <div className='details_div'>
-                <img className='background_img' src={`${_movie?.wallpaper}`} loading='eager' alt="movie-image" />
+                <img className='movie_background' src={`${_movie?.wallpaper}`} loading='lazy' alt="movie-image" />
                 <div className="movie_details">
                     <div className="movie_details_left">
                         <img src={`${_movie?.image}`} alt="movie-image" />
@@ -104,7 +103,6 @@ const Details = () => {
                 </div>
             </div>
         }
-        <Suggested/>
         </>
     );
 };

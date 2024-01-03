@@ -13,10 +13,12 @@ const Sidebar = ({setSidebar}) => {
         </div>
         <div className="sidebar_nav_links">
           <ul>
-            <li>
-              <img src="/images/home.png" alt="" />
-              <span>Home</span>
-            </li>
+            <NavLink className="navlink" to="/">
+              <li>
+                <img src="/images/home.png" alt="" />
+                <span>Home</span>
+              </li>
+            </NavLink>
             {user ? 
               <NavLink className="navlink" to="/create-movies">
                 <li>

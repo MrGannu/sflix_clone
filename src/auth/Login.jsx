@@ -102,7 +102,7 @@ const Login = ({ setLogin }) => {
       {register ? (
         <div className="login_card">
           <img className='close_img' src="/images/close.png" alt="" onClick={() => setLogin(false)} />
-          <form onSubmit={handleRegister}>
+          <form className='login_form' onSubmit={handleRegister}>
             <div className="form_heading">
               <h3>Welcome back!</h3>
             </div>

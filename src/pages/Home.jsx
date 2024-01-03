@@ -6,9 +6,9 @@ import Latest from '../components/Latest'
 const Home = ({_movie}) => {
   return (
     <div className='home_div'>
-      <Carousel/>
+      <Carousel _movie={_movie}/>
       <Movie _movie={_movie} />
-      <Latest/>
+      <Latest _movie={_movie} />
     </div>
   )
 }

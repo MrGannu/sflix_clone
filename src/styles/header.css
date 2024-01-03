@@ -53,7 +53,7 @@
     border-radius: .2rem;
     padding: .5rem;
 }
-form{
+.search_form{
     width: 100%;
     display: flex;
     align-items: center;
@@ -80,6 +80,7 @@ form{
     justify-content: flex-end;
     position: relative;
     user-select: none;
+    cursor: pointer;
 }
 .herder_right span{
     text-transform: capitalize;
@@ -92,6 +93,7 @@ form{
     width: 1rem;
     height: 1rem;
     margin-right: .5rem;
+    cursor: pointer;
 }
 .login{
     display: flex;

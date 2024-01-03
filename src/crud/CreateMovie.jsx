@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { addDoc } from 'firebase/firestore';
 import { movieRef } from '../firebase/config';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
+import "../styles/create-movies.css"
 
 const CreateMovie = () => {
   const [movieData, setMovieData] = useState({
@@ -61,9 +62,10 @@ const CreateMovie = () => {
   };
 
   return (
-    <div>
+    <div className='create_movies_div'>
       <h2>Create a New Movie</h2>
-      <form onSubmit={handleCreateNewMovie}>
+      <form className='create_movies_form' onSubmit={handleCreateNewMovie}>
+        <div className="create_form_group">
         <label>Title:</label>
         <input
           type="text"
@@ -71,20 +73,27 @@ const CreateMovie = () => {
           value={movieData.title}
           onChange={(e) => setMovieData({ ...movieData, title: e.target.value })}
         />
-
+        </div>
+        <div className="create_form_group">
         <label>Image URL:</label>
         <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'image')} />
 
+        </div>
+        <div className="create_form_group">
+          
         <label>Wallpaper URL:</label>
         <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'wallpaper')} />
 
+        </div>
+        <div className="create_form_group">
         <label>Description:</label>
         <textarea
           name="description"
           value={movieData.description}
           onChange={(e) => setMovieData({ ...movieData, description: e.target.value })}
         ></textarea>
-
+        </div>
+        <div className="create_form_group">
         <label>Duration:</label>
         <input
           type="text"
@@ -92,7 +101,9 @@ const CreateMovie = () => {
           value={movieData.duration}
           onChange={(e) => setMovieData({ ...movieData, duration: e.target.value })}
         />
-
+        </div>
+        <div className="create_form_group">
+          
         <label>Ratings:</label>
         <input
           type="text"
@@ -100,6 +111,9 @@ const CreateMovie = () => {
           value={movieData.ratings}
           onChange={(e) => setMovieData({ ...movieData, ratings: e.target.value })}
         />
+        </div>
+        <div className="create_form_group">
+          
 
         <label>Genre:</label>
         <input
@@ -109,6 +123,8 @@ const CreateMovie = () => {
           onChange={(e) => setMovieData({ ...movieData, genre: e.target.value })}
         />
 
+        </div>
+        <div className="create_form_group">
         <label>Release Year:</label>
         <input
           type="text"
@@ -116,7 +132,8 @@ const CreateMovie = () => {
           value={movieData.realised}
           onChange={(e) => setMovieData({ ...movieData, realised: e.target.value })}
         />
-
+        </div>
+        <div className="create_form_group">
         <label>Cast:</label>
         <input
           type="text"
@@ -124,7 +141,9 @@ const CreateMovie = () => {
           value={movieData.casts}
           onChange={(e) => setMovieData({ ...movieData, casts: e.target.value })}
         />
-
+        </div>
+        <div className="create_form_group">
+          
         <label>Production:</label>
         <input
           type="text"
@@ -132,7 +151,9 @@ const CreateMovie = () => {
           value={movieData.production}
           onChange={(e) => setMovieData({ ...movieData, production: e.target.value })}
         />
-
+        </div>
+        <div className="create_form_group">
+          
         <label>Country:</label>
         <input
           type="text"
@@ -140,10 +161,21 @@ const CreateMovie = () => {
           value={movieData.country}
           onChange={(e) => setMovieData({ ...movieData, country: e.target.value })}
         />
+        </div>
+
+
+
+
+
+
+
+
+
+
 
         {error && <div className="error-message">{error}</div>}
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating...' : 'Create Movie'}
+        <button className='create_movie_btn' type="submit" disabled={loading}>
+          {loading ? <img className='upload_loading_img' src="/images/upload_loading.png" alt="" /> : 'Create Movie'}
         </button>
       </form>
     </div>
