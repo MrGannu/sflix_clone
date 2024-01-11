@@ -20,12 +20,20 @@ const Sidebar = ({setSidebar}) => {
               </li>
             </NavLink>
             {user ? 
-              <NavLink className="navlink" to="/create-movies">
-                <li>
-                  <img src="/images/create.png" alt="" />
-                  <span>Add Movies</span>
-                </li>
-              </NavLink> 
+              <>
+                <NavLink className="navlink" to="/create-movies">
+                  <li>
+                    <img src="/images/create.png" alt="" />
+                    <span>Add Movies</span>
+                  </li>
+                </NavLink> 
+                <NavLink className="navlink" to="/edit-movies">
+                  <li>
+                    <img src="/images/edit.png" alt="" />
+                    <span>Edit Movies</span>
+                  </li>
+                </NavLink>
+              </>
               :
               ""
              }

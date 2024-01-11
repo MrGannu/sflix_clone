@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../styles/header.css"
 import { NavLink } from 'react-router-dom'
 import Login from '../auth/Login'
@@ -42,9 +42,12 @@ const Header = ({setSearchQuery, handleSearch}) => {
           </div> 
         }
         {profile && 
+        <>
+          <div className="profile_wrapper" onClick={()=>setProfile(!profile)}></div>
           <div className="profile_div">
             <Profile setProfile={setProfile} profile={profile}/>
           </div>
+        </>
         }
       </div>
       {login && <Login setLogin={setLogin} login={login}/>}

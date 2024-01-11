@@ -48,7 +48,16 @@
     object-fit: contain;
     animation: loading infinite 0.3s ease;
 }
-
+.image_preview{
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+.wallpaper_preview{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
 @keyframes loading {
     from {
         transform: rotate(0deg);

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { addDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { addDoc, getDoc, doc, updateDoc } from 'firebase/firestore';
 import { movieRef } from '../firebase/config';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import "../styles/create-movies.css"
+import { db } from '../firebase/config';
 
-const CreateMovie = () => {
+const CreateMovie = ({ isEditing, initialMovieData }) => {
+  const { id } = useParams();
   const [movieData, setMovieData] = useState({
     title: '',
     image: '',
@@ -22,7 +24,30 @@ const CreateMovie = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState('');
+  const [wallpaperPreview, setWallpaperPreview] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If in edit mode, fetch and set the initial movie data
+    if (isEditing && id) {
+      const fetchMovieData = async () => {
+        try {
+          const movieDoc = await getDoc(doc(db, 'movies', id));
+          if (movieDoc.exists()) {
+            const movie = movieDoc.data();
+            setMovieData(movie);
+            setImagePreview(movie.image); // Set the initial image preview
+            setWallpaperPreview(movie.wallpaper); // Set the initial image preview
+          }
+        } catch (error) {
+          setError(`Failed to fetch movie data: ${error.message}`);
+        }
+      };
+
+      fetchMovieData();
+    }
+  }, [id, isEditing]);
 
   const handleFileChange = async (e, type) => {
     const file = e.target.files[0];
@@ -34,6 +59,8 @@ const CreateMovie = () => {
         await uploadBytes(storageReference, file);
         const downloadURL = await getDownloadURL(storageReference);
         setMovieData((prevData) => ({ ...prevData, [type]: downloadURL }));
+        setImagePreview(downloadURL); // Update the image preview
+        setWallpaperPreview(downloadURL); // Update the image preview
       } catch (error) {
         console.error('File upload failed:', error.message);
       } finally {
@@ -42,20 +69,25 @@ const CreateMovie = () => {
     }
   };
 
-  const handleCreateNewMovie = async (event) => {
+  const handleCreateOrUpdateMovie = async (event) => {
     event.preventDefault();
-  
+
     setLoading(true);
-  
+
     try {
-      // Firestore will generate a unique ID for the movie document
-      await addDoc(movieRef, movieData);
-  
+      if (isEditing && id) {
+        // If in edit mode, update the existing movie data
+        await updateDoc(doc(movieRef, id), movieData);
+      } else {
+        // If in create mode, add a new movie document
+        await addDoc(movieRef, movieData);
+      }
+
       setError('');
-      // Optionally, you can redirect to another page after successful creation
+      // Optionally, you can redirect to another page after successful creation/update
       navigate('/');
     } catch (error) {
-      setError(`Movie creation failed: ${error.message}`);
+      setError(`Movie ${isEditing ? 'update' : 'creation'} failed: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -63,8 +95,8 @@ const CreateMovie = () => {
 
   return (
     <div className='create_movies_div'>
-      <h2>Create a New Movie</h2>
-      <form className='create_movies_form' onSubmit={handleCreateNewMovie}>
+      <h2>{isEditing ? 'Edit' : 'Create'} Movie</h2>
+      <form className='create_movies_form' onSubmit={handleCreateOrUpdateMovie}>
         <div className="create_form_group">
         <label>Title:</label>
         <input
@@ -77,13 +109,13 @@ const CreateMovie = () => {
         <div className="create_form_group">
         <label>Image URL:</label>
         <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'image')} />
-
+        {imagePreview && <img src={imagePreview} alt='Preview' className='image_preview' />}
         </div>
         <div className="create_form_group">
           
         <label>Wallpaper URL:</label>
         <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, 'wallpaper')} />
-
+        {wallpaperPreview && <img src={wallpaperPreview} alt='Preview' className='wallpaper_preview' />}
         </div>
         <div className="create_form_group">
         <label>Description:</label>
@@ -163,19 +195,13 @@ const CreateMovie = () => {
         />
         </div>
 
-
-
-
-
-
-
-
-
-
-
         {error && <div className="error-message">{error}</div>}
-        <button className='create_movie_btn' type="submit" disabled={loading}>
-          {loading ? <img className='upload_loading_img' src="/images/upload_loading.png" alt="" /> : 'Create Movie'}
+        <button className='create_movie_btn' type='submit' disabled={loading}>
+          {loading ? (
+            <img className='upload_loading_img' src='/images/upload_loading.png' alt='' />
+          ) : (
+            `${isEditing ? 'Update' : 'Create'} Movie`
+          )}
         </button>
       </form>
     </div>

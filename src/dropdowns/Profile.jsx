@@ -8,19 +8,19 @@ const Profile = () => {
   return (
     <>
       <h3>Welcome !</h3>
-        <li>
+        <li className='profile_li'>
           <img src="/images/profile_user.png" alt="" />
           <span>Profile</span>
         </li>
-        <li>
+        <li className='profile_li'>
           <img src="/images/profile_settings.png" alt="" />
           <span>Settings</span>
         </li>
-        <li>
+        <li className='profile_li'>
           <img src="/images/lock.png" alt="" />
           <span>Lock Screen</span>
         </li>
-        <li onClick={handleLogout}>
+        <li className='profile_li' onClick={handleLogout}>
           <img src="/images/logout.png" alt="" />
           <span>Logout</span>
         </li>

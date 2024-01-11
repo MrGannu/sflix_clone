@@ -14,12 +14,12 @@ const Latest = ({_movie}) => {
         <h3>Latest Movies</h3>
       </div>
       <div className="movie_cards">
-        {movie.slice(0, 18).map((_movie) => (
+        {movie.map((_movie) => (
           <Card _movie={_movie} key={_movie?.id}/>
         ))}
       </div>
     </div>
   );
 };
-
+// .slice(0, 18)
 export default Latest;
