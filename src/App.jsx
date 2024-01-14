@@ -1,5 +1,5 @@
 // Import necessary components and hooks
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from './firebase/config';
 import { Route, Routes } from 'react-router-dom';
@@ -10,8 +10,9 @@ import Details from './components/Details';
 import CreateMovie from './crud/CreateMovie';
 import EditMovies from './crud/EditMovies';
 
-// Main App component
 const App = () => {
+
+  // context api
   const [_movie, _setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,19 +51,19 @@ const App = () => {
   }
   return (
     <div className='app_div'>
-        <Routes>
-          <Route
-            path='/'
-            element={<Layout setSearchQuery={setSearchQuery} searchQuery={searchQuery} searchData={searchData}/>}
-          >
-            <Route index element={<Home _movie={_movie} />} />
-            <Route path='/create-movies' element={<CreateMovie />} />
-            <Route path='/edit-movies' element={<EditMovies _movie={_movie} isEditing={true}/>} />
-            <Route path='/edit-movies-form/:id' element={<CreateMovie isEditing={true} />} />
-            <Route path='details/:title/:id' element={<Details />} />
-            <Route path='*' element={<NoPage />} />
-          </Route>
-        </Routes>
+      <Routes>
+        <Route
+          path='/'
+          element={<Layout setSearchQuery={setSearchQuery} searchQuery={searchQuery} searchData={searchData} alert={alert}/>}
+        >
+          <Route index element={<Home _movie={_movie} />} />
+          <Route path='/create-movies' element={<CreateMovie />} />
+          <Route path='/edit-movies' element={<EditMovies _movie={_movie} isEditing={true}/>} />
+          <Route path='/edit-movies-form/:id' element={<CreateMovie isEditing={true} />} />
+          <Route path='details/:title/:id' element={<Details />} />
+          <Route path='*' element={<NoPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 };

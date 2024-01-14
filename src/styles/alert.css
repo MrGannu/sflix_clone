@@ -1,0 +1,27 @@
+.alert_model{
+    width: 350px;
+    background: #ffffff;
+    padding: .3rem 1rem;
+    position: fixed;
+    z-index: 1000;
+    border-radius: .3rem;
+    left: .7rem;
+    bottom: .7rem;
+    animation: fade-in 6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+.alert_model h3{
+    font-size: 1rem;
+}
+.alert_model p{
+    font-size: .86rem;
+}
+
+@keyframes fade-in {
+    5%,
+    90%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

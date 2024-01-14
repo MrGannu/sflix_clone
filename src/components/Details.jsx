@@ -4,6 +4,7 @@ import "../styles/details.css"
 import ReactLoading from 'react-loading';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import Alert from '../alerts/Alert';
 
 const Details = () => {
     const [_movie, _setMovie] = useState([]);
@@ -47,6 +48,7 @@ const Details = () => {
             </div>
         :
             <div className='details_div'>
+                <Alert/>
                 <img className='movie_background' src={`${_movie?.wallpaper}`} loading='lazy' alt="movie-image" />
                 <div className="movie_details">
                     <div className="movie_details_left">

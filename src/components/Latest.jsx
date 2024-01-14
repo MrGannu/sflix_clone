@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDocs, collection } from 'firebase/firestore';
-import { db } from '../firebase/config'; 
 import '../styles/card.css';
-import { NavLink } from 'react-router-dom';
 import Card from './Card';
 
 const Latest = ({_movie}) => {

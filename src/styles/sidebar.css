@@ -7,7 +7,6 @@
     z-index: 10;
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.759);
     color: var(--font-heading-color);
 }
 .side_drawer{

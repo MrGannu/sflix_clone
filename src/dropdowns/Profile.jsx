@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Profile = () => {
+const Profile = ({setLogin, setProfile, setAlert, setAlertMessage}) => {
     const handleLogout = () => {
         localStorage.removeItem('userData'); // Remove the item from local storage
-        window.location.reload();
+        setLogin(true)
+        setProfile(false)
+        setAlert(true)
+        setAlertMessage("Logout Successfull")
       };
+
   return (
     <>
       <h3>Welcome !</h3>
