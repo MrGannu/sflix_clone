@@ -9,6 +9,7 @@ import NoPage from './pages/NoPage';
 import Details from './components/Details';
 import CreateMovie from './crud/CreateMovie';
 import EditMovies from './crud/EditMovies';
+import Loading from './loading/Loading';
 
 const App = () => {
 
@@ -58,6 +59,7 @@ const App = () => {
         >
           <Route index element={<Home _movie={_movie} />} />
           <Route path='/create-movies' element={<CreateMovie />} />
+          <Route path='/loading' element={<Loading />} />
           <Route path='/edit-movies' element={<EditMovies _movie={_movie} isEditing={true}/>} />
           <Route path='/edit-movies-form/:id' element={<CreateMovie isEditing={true} />} />
           <Route path='details/:title/:id' element={<Details />} />

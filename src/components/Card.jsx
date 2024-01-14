@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import '../styles/card.css';
 import { NavLink } from 'react-router-dom';
+import Loading from '../loading/Loading';
 
 const Card = ({ _movie, isEditing}) => {
   const [movie, setMovie] = useState(_movie)
-  const [loading, setLoading] = useState(false)
   function handleScrollToTop(){
     return(
       window.scrollTo(0,0)
@@ -13,7 +13,7 @@ const Card = ({ _movie, isEditing}) => {
   return (
       <div className='movie_card' key={movie?.id}>
         <div className="movie_card_img">
-          {loading ? "" : <img src={`${movie?.image}`} loading='lazy' alt="movie-image" />}
+          {!movie?.image ? <Loading/> : <img src={`${movie?.image}`} loading='lazy' alt="movie-image" />}
         </div>
         <div className="movie_card_content_info">
           <div className='movie_card_details'>

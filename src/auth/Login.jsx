@@ -41,8 +41,6 @@ const Login = ({ login, setLogin, setAlert, setAlertMessage }) => {
   
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, { displayName: name });
-      
       // Reset form data
       setData({
         name: '',
@@ -60,7 +58,10 @@ const Login = ({ login, setLogin, setAlert, setAlertMessage }) => {
 
       // Trigger alert
       setAlert(true);
-      setAlertMessage('Registration Successful');
+      setAlertMessage({
+        type: "success",
+        message: 'Registration Successful'
+      });
     } catch (error) {
       setError(`Registration failed: ${error.message}`);
     } finally {
@@ -76,8 +77,6 @@ const Login = ({ login, setLogin, setAlert, setAlertMessage }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
       localStorage.setItem('userData', JSON.stringify(userCredential));
-      console.log('User logged in successfully:', userCredential.user);
-      
       // Reset form data
       setData({
         name: '',
@@ -92,7 +91,10 @@ const Login = ({ login, setLogin, setAlert, setAlertMessage }) => {
   
       // Trigger alert
       setAlert(true);
-      setAlertMessage('Login Successful');
+      setAlertMessage({
+        type: "success",
+        message: 'Login Successful'
+      });
     } catch (error) {
       setError(`Login failed: ${error.message}`);
     } finally {

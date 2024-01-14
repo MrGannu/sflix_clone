@@ -2,11 +2,17 @@ import React, { useContext } from 'react'
 import "../styles/alert.css"
 
 const Alert = ({alertMessage}) => {
-    // {title, message, type}
   return (
     <div className='alert_model'>
-        <h3>Title</h3>
-        <p>{alertMessage}</p>
+      {alertMessage.type === "success" ? (
+        <img src="/images/success.png" alt="success-img" />
+      ) : alertMessage.type === "error" ? (
+        <img src="/images/error.png" alt="success-img" />
+      ) : alertMessage.type === "warning"? (
+        <img src="/images/warning.png" alt="success-img" />
+      ) : null
+      }
+      <p>{alertMessage.message}</p>
     </div>
   )
 }

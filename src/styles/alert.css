@@ -1,5 +1,6 @@
 .alert_model{
     width: 350px;
+    height: 45px;
     background: #ffffff;
     padding: .3rem 1rem;
     position: fixed;
@@ -10,12 +11,21 @@
     animation: fade-in 6s ease forwards;
     opacity: 0;
     transform: translateY(20px);
+    display: flex;
+    align-items: center;
+}
+.alert_model img{
+    width: 1.4rem;
+    height: 1.4rem;
+    object-fit: contain;
+    margin-right: 1rem;
 }
 .alert_model h3{
     font-size: 1rem;
 }
 .alert_model p{
     font-size: .86rem;
+    color: black;
 }
 
 @keyframes fade-in {

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../styles/details.css"
-import ReactLoading from 'react-loading';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import Alert from '../alerts/Alert';
+import Loading from 'react-loading';
 
 const Details = () => {
     const [_movie, _setMovie] = useState([]);
@@ -44,11 +43,10 @@ const Details = () => {
         <>
         {loading ? 
             <div className="loading_img">
-                <ReactLoading height={40} width={40} />
+                <Loading/>
             </div>
         :
             <div className='details_div'>
-                <Alert/>
                 <img className='movie_background' src={`${_movie?.wallpaper}`} loading='lazy' alt="movie-image" />
                 <div className="movie_details">
                     <div className="movie_details_left">

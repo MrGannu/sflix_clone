@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../styles/card.css';
 import Card from './Card';
+import Loading from '../loading/Loading';
 
 const Movie = ({_movie}) => {
-  const [movieData, setMovieData] = useState(_movie)
   return (
     <div className='movie_div'>
       <div className="movie_div_heading">
@@ -14,7 +14,7 @@ const Movie = ({_movie}) => {
         </ul>
       </div>
       <div className="movie_cards">
-        {movieData.slice(0, 12).map((_movie) => (
+        {_movie.slice(0, 12).map((_movie) => (
           <Card _movie={_movie} key={_movie?.id}/>
         ))}
       </div>
